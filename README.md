@@ -1,7 +1,5 @@
 # kimionline - https://kimionline.herokuapp.com/
 
-A real-time online boardgame. Developed in heroku, using node.js / express / socket.io.
-
-Language: Spanish
+a real-time online boardgame with chat and drawing canvas. developed in heroku, using node.js / express / socket.io / p5.js (spanish content).
 
 Still in developing mode. For more information, ask feriodismo@gmail.com
