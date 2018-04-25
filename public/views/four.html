@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+	<title>Kimi | The Game</title>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<script src="../libraries/p5/p5.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+	<!-- beggining of scoreboard -->
+	<div class=scoreboard-container>
+		<div class='latency-bar'></div>
+		<div class='team-bar'>
+			<div class="sb-name-bar">
+				<div class="sb-name-place">
+					<div class='player-circle name-circles' id='four-circle'></div>
+					<p class= 'name-holder' id='four-name'>...</p>
+				</div> 
+				<div class="sb-name-place">
+					<div class='coop-circle name-circles' id='two-circle'></div>
+					<p class= 'name-holder' id='two-name'>...</p>
+				</div> 
+			</div>
+			<div class="sb-point-bar">
+				<div class='sb-point-circle'>
+					<div class='sb-point-circle' ><p class='sb-points' id='par-point'>0</p></div>
+				</div>
+			</div>
+		</div>
+		<div class='scoreboard-space'></div>
+		<div class='team-bar' id='par-bar'>
+				<div class="sb-name-bar">
+				<div class="sb-name-place">
+					<div class='opp1-circle name-circles' id='three-circle'></div>
+					<p class= 'name-holder' id='three-name'>...</p>
+				</div> 
+				<div class="sb-name-place">
+					<div class='opp2-circle name-circles' id='one-circle'></div>
+					<p class= 'name-holder' id='one-name'>...</p>
+				</div> 
+			</div>
+			<div class="sb-point-bar">
+				<div class='sb-point-circle' ><p class='sb-points' id='impar-point'>0</p></div>
+			</div>
+		</div>
+	</div>
+	<!--ending of scoreboard -->
+
+
+	<div class='cardholder-bar' id='two-ch-bar'>
+		<div class='cardholder coop-ch' id="two-ch-0"></div>
+		<div class='cardholder coop-ch' id="two-ch-1"></div>
+		<div class='cardholder coop-ch' id="two-ch-2"></div>
+		<div class='cardholder coop-ch' id="two-ch-3"></div>
+		
+	</div>
+
+	
+
+	
+	<!-- Opp CardHolders -->
+	<div class=middle-container>
+	<!-- listo -->
+	<div class='cardholder-bar opp-ch-bar' id='three-ch-bar'>
+		<div class='cardholder opp-ch opp-ch-left' id="three-ch-3"></div>
+		<div class='cardholder opp-ch opp-ch-left' id="three-ch-2"></div>
+		<div class='cardholder opp-ch opp-ch-left' id="three-ch-1"></div>
+		<div class='cardholder opp-ch opp-ch-left' id="three-ch-0"></div>
+	</div>
+	
+
+	<!-- Table CardHolders -->
+	<div class='cardholder-bar' id='table-ch-bar'>
+		<div class='cardholder table-ch' id="t-ch-12"></div>
+		<div class='cardholder table-ch' id="t-ch-8"></div>
+		<div class='cardholder table-ch' id="t-ch-11"></div>
+		<div class='cardholder table-ch' id="t-ch-13"></div>
+		<div class='cardholder table-ch' id="t-ch-4"></div>
+		<div class='cardholder table-ch' id="t-ch-1"></div>
+		<div class='cardholder table-ch' id="t-ch-2"></div>
+		<div class='cardholder table-ch' id="t-ch-5"></div>
+		<div class='cardholder table-ch' id="t-ch-6"></div>
+		<div class='cardholder table-ch' id="t-ch-0"></div>
+		<div class='cardholder table-ch' id="t-ch-3"></div>
+		<div class='cardholder table-ch' id="t-ch-7"></div>
+		<div class='cardholder table-ch' id="t-ch-14"></div>
+		<div class='cardholder table-ch' id="t-ch-10"></div>
+		<div class='cardholder table-ch' id="t-ch-9"></div>
+		<div class='cardholder table-ch' id="t-ch-15"></div>
+
+
+	</div>
+	
+	<!-- listo -->
+	<div class='cardholder-bar opp-ch-bar' id='one-ch-bar'>
+		<div class='cardholder opp-ch opp-ch-right' id="one-ch-3"></div>
+		<div class='cardholder opp-ch opp-ch-right' id="one-ch-2"></div>
+		<div class='cardholder opp-ch opp-ch-right' id="one-ch-1"></div>
+		<div class='cardholder opp-ch opp-ch-right' id="one-ch-0"></div>	
+	</div>
+	<!-- fin de middle container -->
+	</div>
+	
+
+	<!-- Player CardHolders -->
+	<div class='cardholder-bar' id='four-ch-bar'>
+		<div class='cardholder player-ch' id="four-ch-0"></div>
+		<div class='cardholder player-ch' id="four-ch-1"></div>
+		<div class='cardholder player-ch' id="four-ch-2"></div>
+		<div class='cardholder player-ch' id="four-ch-3"></div>
+	</div>
+
+
+<!-- Begining of ChatBox -->
+	
+	<div class='chat-box' id="chat-box">
+		<div class='chat-box-index'>
+			<div id="chat-btns">
+				<div class="trash" id="kimi-btn"><i style="font-size: 20px;" class="fab fab fa-kickstarter-k"></i></div>
+				<div class="trash" id="cut-btn"><i style="font-size: 20px;" class="fas fa-cut"></i></div>
+				<div class="trash" id="trash-btn"><i style="font-size: 20px; " class="fas fa-trash-alt"></i></div>
+			</div>
+			<div class="trash"></div>
+			<div class="trash"></div>
+			<div class="trash"></div>
+			<div class="trash"></div>
+			<div class="chat-min" id="min-chat-btn"><i style="font-size: 16px; color:white;" class="fas fa-window-minimize"></i></div>
+		</div>
+		<div class='chat-box-canvas' id="chat-box-canvas"></div>
+		<div class='chat-box-canvas-index' id="chat-box-canvas-index">
+
+			<div class="color" id="canvas-yellow"></div>
+			<div class="color" id="canvas-green"></div>
+			<div class="color" id="canvas-pink"></div>
+			<div class="color" id="canvas-white"></div>
+			<div class="color" id="canvas-blue"></div>
+			<div class="color"></div>
+			
+			<div class="color"></div>
+			<div class="trash" id='clear-canvas'><i style="font-size: 20px;" class="fas fa-sync"></i></div>
+			
+		</div>
+<!-- All this HTML is going to js -->
+		<div class='chat-box-text' id="box-text">
+
+		<!-- 	<div class='chat-box-friend'>
+				<div class='friend-message'>hola como estas?</div>
+				<div class='friend-name'>jeannifer</div></div>
+			<div class='chat-box-player'>
+				<div class='player-message'>hola como estas? ahh?</div>
+				<div class='player-name'>nicole</div>
+			</div> -->
+
+		</div>
+
+		<div class="chat-typing" id="box-typing"></div>
+		<div class="chat-box-div-input" id="chat-input-div">
+			<input class="chat-box-input" id="type-input-four" placeholder="escribe algo..." type="text">
+		</div>
+	</div>
+
+<!-- Ending of ChatBox -->
+<!-- beggining of friend Chat Box -->
+	<div class='friend-chat-box' id="friend-chat-box">
+		<div class='friend-chat-box-index'>
+			<div class="trash"></div>
+			<div class="trash"></div>
+			<div class="trash"></div>
+			<div class="trash"></div>
+			<div class="trash"></div>
+			<div class="trash"></div>
+			<div class="trash"></div>
+			<div class="trash" id='play-btn'><i title='jugar!' style="font-size: 22px; margin-left: 40px;" class="fas fa-flag-checkered"></i></div>
+		</div>
+		<div class='friend-chat-box-canvas' id="friend-chat-box-canvas"></div>
+		<div class='friend-chat-box-canvas-index' id="friend-chat-box-canvas-index">
+
+			<div class="color" id="friend-canvas-yellow"></div>
+			<div class="color" id="friend-canvas-green"></div>
+			<div class="color" id="friend-canvas-pink"></div>
+			<div class="color" id="friend-canvas-white"></div>
+			<div class="color" id="friend-canvas-blue"></div>
+			<div class="color"></div>
+			<div class="color"></div>
+			<div class="trash" title='refrescar canvas!' id='friend-clear-canvas'><i style="font-size: 20px;" class="fas fa-sync"></i></div>
+			
+		</div>
+
+		<div class='friend-chat-box-text' id="friend-box-text"></div>
+
+		<div class="friend-chat-typing" id="friend-box-typing"></div>
+		<div class="friend-chat-box-div-input" id="friend-chat-input-div">
+			<input class="friend-chat-box-input" id="friend-type-input" placeholder="escribele a tu companiero..." type="text">
+		</div>
+	</div>
+	<!-- ending of friend chat box -->
+
+</div> 
+<!-- Ending #app -->
+
+<!-- Beginnig myAlert -->
+	<div class='fixed' id='my-alert'>
+			
+			<div class='my-alert'>
+				<input id='alert-ipt' maxlength='15' placeholder='nombre??''><br>
+				<button id='alert-btn'>enviar</button>
+
+			</div>
+	</div>
+	 <div class='fixed' id='my-alert-trash'>
+		<div class='my-alert'>
+				<h2>basura?</h2><br>
+				<button id='yes-btn'>si</button><button id='no-btn'>no</button>
+			</div>
+	</div>
+	<div class='fixed' id='my-alert-cut'>
+		<div class='my-alert'>
+				<h2>a quien quieres hacer el corte?</h2><br>
+				<button id='opp1-btn'><--</button><button id='opp2-btn'>--></button>
+			</div>
+	</div>
+<div class='pause'><div class='pause-msj'>juego pausado</div></div>
+	
+<!-- Ending myAlert -->
+	
+	<script src="../js/watch.min.js" type="text/javascript"></script>
+	<script>
+
+			var thisPlayer = 'four';
+			var namePlayer;
+			var coopPlayer = 'two';
+			var opp1 = 'three';
+			var opp2 = 'one';
+			var team = 'par';
+			var oppTeam = 'impar';
+
+	</script>
+	<script src="../js/script.js"></script>
+	<script src="../js/canvas.js"></script>
+	<script src="../js/chat.js"></script>
+	<script src="../js/scoreboard.js"></script>
+	<script src="../js/tab-checker.js"></script>
+
+</body>
+</html>
